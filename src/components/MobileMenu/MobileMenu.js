@@ -15,24 +15,26 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
     <Wrapper isOpen={isOpen} onDismiss={onDismiss}>
       <Backdrop />
       <Content aria-label="Menu">
-        <CloseButton onClick={onDismiss}>
-          <Icon id="close" />
-          <VisuallyHidden>Dismiss menu</VisuallyHidden>
-        </CloseButton>
-        <Filler />
-        <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Footer>
-          <SubLink href="/terms">Terms and Conditions</SubLink>
-          <SubLink href="/privacy">Privacy Policy</SubLink>
-          <SubLink href="/contact">Contact Us</SubLink>
-        </Footer>
+        <InnerWrapper>
+          <CloseButton onClick={onDismiss}>
+            <Icon id="close" />
+            <VisuallyHidden>Dismiss menu</VisuallyHidden>
+          </CloseButton>
+          <Filler />
+          <Nav>
+            <NavLink href="/sale">Sale</NavLink>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <NavLink href="/men">Men</NavLink>
+            <NavLink href="/women">Women</NavLink>
+            <NavLink href="/kids">Kids</NavLink>
+            <NavLink href="/collections">Collections</NavLink>
+          </Nav>
+          <Footer>
+            <SubLink href="/terms">Terms and Conditions</SubLink>
+            <SubLink href="/privacy">Privacy Policy</SubLink>
+            <SubLink href="/contact">Contact Us</SubLink>
+          </Footer>
+        </InnerWrapper>
       </Content>
     </Wrapper>
   );
@@ -85,10 +87,19 @@ const Content = styled(DialogContent)`
   height: 100%;
   margin-right: calc(var(--overfill) * -1);
   padding: 24px 32px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${slideIn} 500ms both cubic-bezier(0, .6, .32, 1.06);
+    animation-delay: 200ms;
+  }
+  `;
+
+const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  animation: ${slideIn} 500ms both cubic-bezier(0, .6, .32, 1.06);
-  animation-delay: 200ms;
+  height: 100%;
+  animation: ${fadeIn} 600ms both;
+  animation-delay: 400ms;
 `;
 
 const CloseButton = styled(UnstyledButton)`
