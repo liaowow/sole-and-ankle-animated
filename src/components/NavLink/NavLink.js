@@ -29,15 +29,19 @@ const Wrapper = styled.a`
 
 const Text = styled.span`
   display: block;
+  transform: translateY(var(--translate-from));
+  transition: transform 500ms;
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${Wrapper}:hover & {
+      transform: translateY(var(--translate-to));
+    }
+  }
 `;
 
 const MainText = styled(Text)`
-  transform: translateY(0%);
-  transition: transform 500ms;
-  
-  ${Wrapper}:hover & {
-    transform: translateY(-100%);
-  }
+  --translate-from: 0%;
+  --translate-to: -100%;
 `;
 
 const HoverText = styled(Text)`
@@ -46,13 +50,9 @@ const HoverText = styled(Text)`
   left: 0;
   width: 100%;
   height: 100%;
-  font-weight: bold;
-  transform: translateY(100%);
-  transition: transform 250ms;
-  
-  ${Wrapper}:hover & {
-    transform: translateY(0%);
-  }
+  font-weight: ${WEIGHTS.bold};
+  --translate-from: 100%;
+  --translate-to: 0%;
 `;
 
 export default NavLink;
